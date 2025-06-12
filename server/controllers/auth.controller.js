@@ -49,19 +49,20 @@ export const login = async (req, res) => {
 
         //3.generate token
         const token = jwt.sign(
-            {userId: user._id, role: user.role},
+            {userid: user._id},
             process.env.JWT_SECRET,
-            {expiresIn: "7d"}
-        );
-
+            {expiresIn: '7d'}
+            
+        )
         res.status(200).json({
-            token,
-            user:{
+            token: token,
+            user: {
                 name: user.name,
                 email: user.email,
-                role: user.role,
-            },
-        });
+            }
+        })
+
+
     } catch (err) {
         res.status(500).json({msg: err.message});
     }
