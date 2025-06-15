@@ -22,16 +22,3 @@ export const createProject = async (req, res) => {
 
 
 
-
-export const getClientProjects = async (req, res) => {
-    try {
-        const clientId = req.user.userId;
-
-        const projects = await Project.find({clientId});
-
-        res.status(200).json({projects});
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({msg: "Something went wrong"});
-    }
-};
