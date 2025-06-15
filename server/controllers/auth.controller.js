@@ -10,7 +10,10 @@ export const register = async (req, res) => {
         const {name, email, password, role} = req.body;
 
         //Check if user already exist
-
+        const existingUser = await User.findOne({email});
+        if (existingUser) {
+            return res.status(400).json({msg: "User already exists"});
+        }
 
     //Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
